@@ -1,0 +1,78 @@
+.productsPg {
+  height: calc(100vh - 10vh);
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.filterCntr {
+  background-color: #afcbd5;
+  border: 1px solid #afcbd5;
+  width: 20%;
+  border-radius: 5px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.filterSubCntr {
+  height: 92%;
+  overflow-y: scroll;
+}
+
+.filterCntr h4 {
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  background-color: #272838;
+  color: #ecf8fd;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.filterCntr h4 span {
+  margin-left: 0.5rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  background-color: #b1aa81;
+  padding: 0.2rem 0.4rem;
+  color: #272838;
+  border: 0.6px solid #b1aa81;
+  border-radius: 5px;
+  transition: all 0.25s ease-in-out;
+}
+
+.filterCntr h4 span:hover {
+  background-color: #272838;
+  color: #b1aa81;
+}
+
+.filterArea {
+  padding: 0.5rem 0.5rem 0 0.5rem;
+}
+
+.filterArea h5 {
+  padding: 0.5rem;
+  background-color: #272838;
+  color: #ecf8fd;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.filterType {
+  padding: 0.35rem 0.5rem;
+}
+
+.filterType input {
+  margin-right: 0.5rem;
+}
+
+.filterArea label {
+  font-size: 0.9rem;
+  color: #272838;
+  font-weight: 500;
+}
