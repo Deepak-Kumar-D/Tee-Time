@@ -1,17 +1,22 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { addCart } from "@/app/GlobalRedux/Features/counter/counterSlice";
+import { RootState } from "@/app/GlobalRedux/store";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const ProductsCntr = (props: any) => {
-  const { products } = props;
+const ProductsCntr = () => {
+  const reduxProducts = useSelector((state: RootState) => state.productRed);
+  const dispatch = useDispatch();
+
   return (
     <section className="productsCntr">
-      {!products.length && (
+      {!reduxProducts.filteredProducts.length && (
         <div className="products-info">
           <p>No products found</p>
         </div>
       )}
 
-      {products.map((product: any, index: any) => {
+      {reduxProducts.filteredProducts.map((product: any, index: any) => {
         return (
           <div className="productCard" key={`product_${index}`}>
             <div className="productImg">
@@ -20,7 +25,7 @@ const ProductsCntr = (props: any) => {
 
             <div className="productAddCntr flexRowSBC">
               <h6>{product.name}</h6>
-              <button>
+              <button onClick={() => dispatch(addCart(product))}>
                 ₹{product.price} <span>ADD</span>
               </button>
             </div>

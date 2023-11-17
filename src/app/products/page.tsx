@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from "react";
 import ProductsCntr from "../../components/productsCntr";
 import styles from "./page.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { addProduct, addFilter, resetFilters } from "../GlobalRedux/Features/counter/counterSlice";
+import { RootState } from "../GlobalRedux/store";
 
 const Products = () => {
+  const reduxProducts = useSelector((state: RootState) => state.productRed);
+  const dispatch = useDispatch();
   const [colors, setColors] = useState<any[]>([]);
   const [types, setTypes] = useState<any[]>([]);
-  const [products, setProducts] = useState<any[]>([]);
-  const [filteredProd, setFilteredProd] = useState<any[]>([]);
   const [filters, setFilters] = useState({ gender: "", colours: [] as any, price: "", type: [] as any });
 
   const selectFilter = (type: any, option: any) => {
@@ -49,9 +52,9 @@ const Products = () => {
     let tempFiltered = new Array();
 
     if (tempFilters.gender) {
-      arr = products.filter((prod) => prod.gender.toLowerCase() === tempFilters.gender);
+      arr = reduxProducts.products.filter((prod: any) => prod.gender.toLowerCase() === tempFilters.gender);
     } else {
-      arr = [...products];
+      arr = [...reduxProducts.products];
     }
 
     if (tempFilters.price) {
@@ -60,8 +63,8 @@ const Products = () => {
       let range2 = Number(rangeP[1].replace("₹", ""));
 
       arr = arr.filter((prod) => prod.price >= range1 && prod.price <= range2);
-    } else {
-      arr = [...products];
+    } else if (!tempFilters.gender) {
+      arr = [...reduxProducts.products];
     }
 
     if (tempFilters.colours.length) {
@@ -93,17 +96,17 @@ const Products = () => {
     }
 
     if (tempFiltered.length) {
-      setFilteredProd(tempFiltered);
+      dispatch(addFilter(tempFiltered));
     } else if ((tempFilters.gender || tempFilters.price) && !tempFilters.colours.length && !tempFilters.type.length) {
-      setFilteredProd(arr);
+      dispatch(addFilter(arr));
     } else {
-      setFilteredProd([]);
+      dispatch(addFilter([]));
     }
   };
 
-  const resetFilters = () => {
+  const handleResetFilters = () => {
     setFilters({ gender: "", colours: [] as any, price: "", type: [] as any });
-    setFilteredProd([...products]);
+    dispatch(resetFilters());
     document.querySelectorAll("input[type=checkbox]").forEach((el: any) => (el.checked = false));
     document.querySelectorAll("input[type=radio]").forEach((el: any) => (el.checked = false));
   };
@@ -112,8 +115,7 @@ const Products = () => {
     try {
       const resp = await fetch("https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json");
       const tempProducts = await resp.json();
-      setProducts(tempProducts);
-      setFilteredProd(tempProducts);
+      dispatch(addProduct(tempProducts));
 
       let tempColours = [];
       let tempTypes = [];
@@ -139,7 +141,7 @@ const Products = () => {
     <section className={`${styles.productsPg}`}>
       <div className={`${styles.filterCntr}`}>
         <h4>
-          Filter Products <span onClick={resetFilters}>Reset</span>
+          Filter Products <span onClick={handleResetFilters}>Reset</span>
         </h4>
 
         <div className={`${styles.filterSubCntr}`}>
@@ -204,7 +206,7 @@ const Products = () => {
         </div>
       </div>
 
-      <ProductsCntr products={filteredProd} />
+      <ProductsCntr />
     </section>
   );
 };

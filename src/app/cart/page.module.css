@@ -1,0 +1,148 @@
+.cartSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.cartCntr {
+  background-color: #ffffff;
+  width: 60%;
+  overflow: hidden;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cartCntr h3 {
+  padding: 1rem;
+  height: 70px;
+  font-weight: 500;
+  border-bottom: 2px solid #272838;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cartCntr h3 svg {
+  width: 30px;
+  height: auto;
+}
+
+.cartDetailCntr {
+  height: calc(90vh - 2rem - 140px);
+  overflow-y: scroll;
+}
+
+.cartCard {
+  background-color: #ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 1px 0px 8px 1px #00000035;
+}
+
+.cartDetail {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.cartImg {
+  height: 100px;
+  overflow: hidden;
+}
+
+.cartImg img {
+  height: 100%;
+  width: auto;
+}
+
+.cartHeader h6 {
+  color: #272838;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0.5rem 0;
+}
+
+.cartHeader p {
+  color: #272838;
+}
+
+.cartCta {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.deleteItem {
+  width: 100px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #272838;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.25s ease-in-out;
+}
+
+.deleteItem:hover {
+  background-color: #272838;
+  color: #ffffff;
+}
+
+.toggleQty {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggleQty button {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border: 1px solid #272838;
+  color: #272838;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  background-color: #27283817;
+  transition: all 0.25s ease-in-out;
+}
+
+.toggleQty button:hover {
+  background-color: #f2b418;
+  border-color: #f2b418;
+}
+
+.toggleQty p {
+  width: 40px;
+  text-align: center;
+}
+
+.cartTotal {
+  padding: 1rem;
+  height: 70px;
+  background-color: #272838;
+  text-align: center;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+.cartTotal p {
+  color: #f2b418;
+  font-size: 1.2rem;
+}
+
+.cartTotal p span {
+  padding: 0 1rem;
+  color: #ffffff;
+  font-size: 1rem;
+}

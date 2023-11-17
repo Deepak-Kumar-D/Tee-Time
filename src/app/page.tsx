@@ -26,7 +26,7 @@ export default function Home() {
         <img src="/images/home-banner.jpg" alt="Home Banner" />
       </div>
 
-      <ProductsCntr products={products} />
+      <ProductsCntr />
     </section>
   );
 }
