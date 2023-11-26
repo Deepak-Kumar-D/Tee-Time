@@ -32,7 +32,7 @@
 }
 
 .cartDetailCntr {
-  height: calc(90vh - 2rem - 140px);
+  height: calc(90dvh - 2rem - 140px);
   overflow-y: scroll;
 }
 
