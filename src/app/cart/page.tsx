@@ -26,26 +26,26 @@ const Cart = () => {
             {reduxProducts.cart.map((item: any) => {
               return (
                 <div className={styles.cartCard} key={`item_+${item.id}`}>
-                  <div className={styles.cartDetail}>
-                    <div className={styles.cartImg}>
-                      <img src={item.imageURL} alt="cart Image" />
-                    </div>
+                  <div className={styles.cartImg}>
+                    <img src={item.imageURL} alt="cart Image" />
+                  </div>
 
+                  <div className={styles.cartDetail}>
                     <div className={styles.cartHeader}>
                       <h6>{item.name}</h6>
                       <p>₹{item.price}</p>
                     </div>
-                  </div>
 
-                  <div className={styles.cartCta}>
-                    <div className={styles.toggleQty}>
-                      <button onClick={() => dispatch(removeQuantity(item))}>-</button>
-                      <p>{item.cartQty}</p>
-                      <button onClick={() => dispatch(addCart(item))}>+</button>
+                    <div className={styles.cartCta}>
+                      <div className={styles.toggleQty}>
+                        <button onClick={() => dispatch(removeQuantity(item))}>-</button>
+                        <p>{item.cartQty}</p>
+                        <button onClick={() => dispatch(addCart(item))}>+</button>
+                      </div>
+                      <button className={styles.deleteItem} onClick={() => dispatch(removeCartItem(item))}>
+                        Delete
+                      </button>
                     </div>
-                    <button className={styles.deleteItem} onClick={() => dispatch(removeCartItem(item))}>
-                      Delete
-                    </button>
                   </div>
                 </div>
               );

@@ -66,8 +66,18 @@ export const counterSlice = createSlice({
 
       state.cart = tempItem;
     },
+    searchItem: (state: any, action) => {
+      let item = action.payload.split(" ");
+      let tempItems = [...state.products];
+
+      item.forEach((key: any) => {
+        tempItems = tempItems.filter((ele: any) => ele.name.toLowerCase().includes(key) || ele.color.toLowerCase().includes(key) || ele.type.toLowerCase().includes(key));
+      });
+
+      state.filteredProducts = tempItems;
+    },
   },
 });
 
-export const { addProduct, addCart, removeQuantity, removeCartItem, addFilter, resetFilters } = counterSlice.actions;
+export const { addProduct, addCart, removeQuantity, removeCartItem, addFilter, resetFilters, searchItem } = counterSlice.actions;
 export default counterSlice.reducer;

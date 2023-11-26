@@ -1,9 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import ProductsCntr from "../../components/productsCntr";
 import styles from "./page.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addProduct, addFilter, resetFilters } from "../GlobalRedux/Features/counter/counterSlice";
+import { addProduct, addFilter, resetFilters, searchItem } from "../GlobalRedux/Features/counter/counterSlice";
 import { RootState } from "../GlobalRedux/store";
 
 const Products = () => {
@@ -12,6 +12,7 @@ const Products = () => {
   const [colors, setColors] = useState<any[]>([]);
   const [types, setTypes] = useState<any[]>([]);
   const [filters, setFilters] = useState({ gender: "", colours: [] as any, price: "", type: [] as any });
+  const [openFilter, setOpenFilter] = useState(false);
 
   const selectFilter = (type: any, option: any) => {
     let tempFilters = { ...filters };
@@ -111,6 +112,10 @@ const Products = () => {
     document.querySelectorAll("input[type=radio]").forEach((el: any) => (el.checked = false));
   };
 
+  const searchProduct = (event: any) => {
+    dispatch(searchItem(event.target.value.toLowerCase()));
+  };
+
   const getProducts = async () => {
     try {
       const resp = await fetch("https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json");
@@ -139,11 +144,36 @@ const Products = () => {
 
   return (
     <section className={`${styles.productsPg}`}>
-      <div className={`${styles.filterCntr}`}>
+      <div className={styles.respHeader}>
+        <div onClick={() => setOpenFilter(!openFilter)}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" id="filter">
+            <path fill="#000" fill-rule="evenodd" d="M20 5h-1.17a3.001 3.001 0 0 0-5.66 0H4a1 1 0 0 0 0 2h9.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2zm-4 2a1 1 0 1 0 0-2 1 1 0 0 0 0 2zM3 12a1 1 0 0 1 1-1h1.17a3.001 3.001 0 0 1 5.66 0H20a1 1 0 1 1 0 2h-9.17a3.001 3.001 0 0 1-5.66 0H4a1 1 0 0 1-1-1zm5 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-4 4a1 1 0 1 0 0 2h9.17a3.001 3.001 0 0 0 5.66 0H20a1 1 0 1 0 0-2h-1.17a3.001 3.001 0 0 0-5.66 0H4zm13 1a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+
+        <div className={`${styles.searchCntr} flexRowSBC`}>
+          <input type="text" onKeyUp={searchProduct} />
+          <span>🔍</span>
+        </div>
+      </div>
+
+      <div className={`${styles.filterCntr}`}>{filterComponent()}</div>
+
+      <div className={`${styles.respFilterCntr} ${openFilter ? styles.openFilter : styles.closeFilter}`}>{filterComponent()}</div>
+
+      <ProductsCntr />
+    </section>
+  );
+
+  function filterComponent() {
+    return (
+      <Fragment>
+        <p className={styles.closeFilterIcon} onClick={() => setOpenFilter(!openFilter)}>
+          🆇
+        </p>
         <h4>
           Filter Products <span onClick={handleResetFilters}>Reset</span>
         </h4>
-
         <div className={`${styles.filterSubCntr}`}>
           <div className={`${styles.filterArea}`}>
             <h5>Gender</h5>
@@ -204,11 +234,9 @@ const Products = () => {
             })}
           </div>
         </div>
-      </div>
-
-      <ProductsCntr />
-    </section>
-  );
+      </Fragment>
+    );
+  }
 };
 
 export default Products;
