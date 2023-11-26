@@ -175,7 +175,7 @@
     height: 100%;
     background-color: #b1aa81;
     padding: 1rem;
-    animation: openMenuAnim 0.25s forwards ease-in;
+    animation: openMenuAnim 0.35s forwards ease-in-out;
   }
 
   @keyframes openMenuAnim {
