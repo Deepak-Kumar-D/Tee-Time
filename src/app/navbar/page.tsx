@@ -54,7 +54,7 @@ const Navbar = () => {
       </div>
 
       <div className={styles.navRespCntr}>
-        <Link className={`objCenter ${pathname === "/cart" && styles.activeNav}`} href="/cart">
+        <Link className={`objCenter`} href="/cart">
           <div className={`${styles.cartIcon} objCenter`}>
             {reduxProducts.cart.length > 0 && <p className={`${styles.cartCount} objCenter`}>{reduxProducts.cart.length}</p>}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -78,7 +78,9 @@ const Navbar = () => {
           </div>
 
           <div className={styles.navRespList} onClick={() => setOpenMenu(!openMenu)}>
-            <Link href="/">Home</Link>
+            <Link className={`${pathname === "/" && styles.activeNav}`} href="/">
+              Home
+            </Link>
 
             <Link className={`${pathname === "/products" && styles.activeNav}`} href="/products" onClick={() => setOpenMenu(!openMenu)}>
               Products
